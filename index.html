@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="energy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Awaken Your Energy — أيقظ طاقتك</title>
+<meta name="description" content="Interactive trilingual app based on Islam &amp; Wasted Energies by Sheikh Mohammed al-Ghazali">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="genius.css">
+</head>
+<body>
+<canvas id="particlesCanvas" class="particles-canvas"></canvas>
+<!-- SPLASH SCREEN -->
+<div id="splash" class="splash">
+  <div class="splash-content">
+    <div class="splash-icon">&#9889;</div>
+    <h1 class="splash-title">&#1571;&#1610;&#1602;&#1592; &#1591;&#1575;&#1602;&#1578;&#1603;</h1>
+    <p class="splash-subtitle">Awaken Your Energy</p>
+    <p class="splash-book">&#1575;&#1604;&#1573;&#1587;&#1604;&#1575;&#1605; &#1608;&#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1605;&#1593;&#1591;&#1604;&#1577;</p>
+    <p class="splash-author">&#1575;&#1604;&#1588;&#1610;&#1582; &#1605;&#1581;&#1605;&#1583; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610;</p>
+    <div class="splash-guide-items" id="splashGuide">
+      <div class="splash-guide-item" style="animation-delay:0.3s"><span>&#9889;</span> <span data-splash="g1">اكتشف الأسباب</span></div>
+      <div class="splash-guide-item" style="animation-delay:0.7s"><span>&#128267;</span> <span data-splash="g2">افهم الطاقات</span></div>
+      <div class="splash-guide-item" style="animation-delay:1.1s"><span>&#128138;</span> <span data-splash="g3">طبّق الحلول</span></div>
+      <div class="splash-guide-item" style="animation-delay:1.5s"><span>&#129300;</span> <span data-splash="g4">قيّم نفسك</span></div>
+    </div>
+    <div class="splash-countdown" id="splashCountdown">3</div>
+    <div class="splash-loader"><div class="splash-loader-bar"></div></div>
+    <!-- Workshop-DIY Logo Badge -->
+    <div class="splash-badge">
+      <svg width="40" height="40" viewBox="0 0 40 40" class="workshop-logo-svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#FFD740" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="14" fill="none" stroke="#FFD740" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <text x="20" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="#FFD740" font-family="Rajdhani,sans-serif">W</text>
+        <path d="M8 20a12 12 0 0124 0" fill="none" stroke="#FFD740" stroke-width="0.5" opacity="0.5"/>
+      </svg>
+      <span class="splash-badge-text">workshop-diy.org</span>
+    </div>
+  </div>
+</div>
+
+<!-- SACRED BAR -->
+<div class="sacred-bar" id="sacredBar">
+  <div class="sacred-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="sacred-verse">إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ</div>
+</div>
+<!-- HEADER -->
+<header class="app-header" id="appHeader">
+  <div class="header-row">
+    <div class="header-left">
+      <a href="https://workshop-diy.org" target="_blank" rel="noopener" class="workshop-badge" title="Workshop DIY">
+        <svg width="32" height="32" viewBox="0 0 40 40" class="workshop-logo-svg header-logo">
+          <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3,3"/>
+          <text x="20" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor" font-family="Rajdhani,sans-serif">W</text>
+          <path d="M8 20a12 12 0 0124 0" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+      </a>
+      <h1 class="app-title"><span class="title-icon">&#9889;</span> <span data-i18n="appTitle">&#1571;&#1610;&#1602;&#1592; &#1591;&#1575;&#1602;&#1578;&#1603;</span></h1>
+    </div>
+    <div class="header-right">
+      <!-- Language Switcher -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="ar" title="العربية">
+          <svg width="20" height="14" viewBox="0 0 30 20"><rect width="15" height="20" fill="#006233"/><rect x="15" width="15" height="20" fill="#fff"/><circle cx="16.5" cy="10" r="5" fill="#D21034"/><circle cx="18" cy="10" r="4" fill="#fff"/><circle cx="17" cy="10" r="4" fill="#006233"/><polygon points="17,6 18,9 21,9 18.5,11 19.5,14 17,12 14.5,14 15.5,11 13,9 16,9" fill="#D21034" transform="scale(0.6) translate(14,7)"/></svg>
+        </button>
+        <button class="lang-btn" data-lang="en" title="English">
+          <svg width="24" height="16" viewBox="0 0 24 16" class="flag-svg"><rect width="24" height="16" fill="#012169"/><path d="M0 0l24 16M24 0L0 16" stroke="#fff" stroke-width="2.5"/><path d="M0 0l24 16M24 0L0 16" stroke="#C8102E" stroke-width="1.5"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="4"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="2.5"/></svg>
+        </button>
+        <button class="lang-btn" data-lang="fr" title="Francais">
+          <svg width="24" height="16" viewBox="0 0 24 16" class="flag-svg"><rect width="8" height="16" fill="#002395"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ED2939"/></svg>
+        </button>
+      </div>
+      <!-- Theme Switcher -->
+      <div class="theme-switcher">
+        <button class="theme-btn active" data-theme="energy" title="طاقة Energy">&#9889;</button>
+        <button class="theme-btn" data-theme="fajr" title="فجر Dawn">&#127761;</button>
+        <button class="theme-btn" data-theme="yaqza" title="يقظة Awakening">&#127793;</button>
+      </div>
+      <!-- Help -->
+      <button class="help-btn" id="helpBtn" title="Help">?</button>
+      <!-- Reading Mode -->
+      <button class="reading-mode-btn" id="readingModeBtn" title="Reading Mode">&#128214;</button>
+      <!-- Sound toggle -->
+      <button class="sound-btn" id="soundBtn" title="Sound">&#128266;</button>
+    </div>
+  </div>
+  <!-- Progress Tracker Bar -->
+  <div class="progress-tracker" id="progressTracker">
+    <div class="progress-label" data-i18n="progressLabel">&#1578;&#1602;&#1583;&#1605;&#1603;</div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBarFill"></div>
+    </div>
+    <span class="progress-text" id="progressText">0/6</span>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="app-main" id="appMain">
+
+  <!-- HOME TAB -->
+  <section class="tab-content" id="tab-home">
+    <div class="home-hero">
+      <div class="energy-meter-container">
+        <h2 class="section-title" data-i18n="homeTitle">&#1604;&#1608;&#1581;&#1577; &#1575;&#1604;&#1591;&#1575;&#1602;&#1577;</h2>
+        <div class="energy-meter">
+          <svg viewBox="0 0 200 120" class="meter-svg">
+            <defs>
+              <linearGradient id="meterGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#D32F2F"/>
+                <stop offset="50%" stop-color="#FFA000"/>
+                <stop offset="100%" stop-color="#4CAF50"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#333" stroke-width="12" stroke-linecap="round" opacity="0.2"/>
+            <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="url(#meterGrad)" stroke-width="12" stroke-linecap="round" id="meterArc"/>
+            <line x1="100" y1="100" x2="100" y2="30" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" id="meterNeedle" transform="rotate(-60,100,100)"/>
+            <circle cx="100" cy="100" r="6" fill="var(--accent)"/>
+            <text x="20" y="115" font-size="10" fill="var(--text-secondary)" data-i18n="meterLow">&#1605;&#1593;&#1591;&#1604;&#1577;</text>
+            <text x="155" y="115" font-size="10" fill="var(--text-secondary)" data-i18n="meterHigh">&#1605;&#1601;&#1593;&#1604;&#1577;</text>
+          </svg>
+          <div class="meter-label" id="meterLabel" data-i18n="meterStart">&#1575;&#1576;&#1583;&#1571; &#1575;&#1604;&#1578;&#1602;&#1610;&#1610;&#1605; &#1604;&#1602;&#1610;&#1575;&#1587; &#1591;&#1575;&#1602;&#1578;&#1603;</div>
+        </div>
+      </div>
+      <!-- Daily Challenge Card -->
+      <div class="challenge-card" id="challengeCard">
+        <div class="challenge-header">
+          <span class="challenge-icon">&#127942;</span>
+          <span class="challenge-title" data-i18n="challengeTitle">&#1578;&#1581;&#1583;&#1610; &#1575;&#1604;&#1610;&#1608;&#1605;</span>
+          <button class="challenge-done-btn" id="challengeDoneBtn" data-i18n="challengeDone">&#10003; &#1571;&#1606;&#1580;&#1586;&#1578;</button>
+        </div>
+        <p class="challenge-text" id="challengeText"></p>
+      </div>
+      <div class="daily-tip-card" id="dailyTip">
+        <div class="tip-header">
+          <span class="tip-icon">&#128161;</span>
+          <span class="tip-title" data-i18n="dailyTip">&#1606;&#1589;&#1610;&#1581;&#1577; &#1575;&#1604;&#1610;&#1608;&#1605; &#1604;&#1578;&#1601;&#1593;&#1610;&#1604; &#1575;&#1604;&#1591;&#1575;&#1602;&#1577;</span>
+        </div>
+        <p class="tip-text" id="tipText"></p>
+      </div>
+      <div class="home-intro-card reveal-on-scroll">
+        <h3 data-i18n="introTitle">&#1593;&#1606; &#1607;&#1584;&#1575; &#1575;&#1604;&#1578;&#1591;&#1576;&#1610;&#1602;</h3>
+        <p data-i18n="introText">&#1605;&#1604;&#1582;&#1589; &#1578;&#1601;&#1575;&#1593;&#1604;&#1610; &#1604;&#1603;&#1578;&#1575;&#1576; "&#1575;&#1604;&#1573;&#1587;&#1604;&#1575;&#1605; &#1608;&#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1605;&#1593;&#1591;&#1604;&#1577;" &#1604;&#1604;&#1588;&#1610;&#1582; &#1605;&#1581;&#1605;&#1583; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610;. &#1610;&#1588;&#1582;&#1589; &#1571;&#1587;&#1576;&#1575;&#1576; &#1578;&#1585;&#1575;&#1580;&#1593; &#1575;&#1604;&#1571;&#1605;&#1577; &#1608;&#1610;&#1602;&#1578;&#1585;&#1581; &#1581;&#1604;&#1608;&#1604;&#1575; &#1593;&#1605;&#1604;&#1610;&#1577; &#1604;&#1573;&#1610;&#1602;&#1575;&#1592; &#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1603;&#1575;&#1605;&#1606;&#1577;.</p>
+      </div>
+      <!-- Sufi Critique Card -->
+      <div class="sufi-card reveal-on-scroll">
+        <div class="sufi-header">
+          <span class="sufi-icon">&#128142;</span>
+          <h3 data-i18n="sufiTitle">&#1585;&#1572;&#1610;&#1577; &#1576;&#1575;&#1585;&#1586;&#1577;: &#1606;&#1602;&#1583; &#1575;&#1604;&#1578;&#1589;&#1608;&#1601; &#1575;&#1604;&#1605;&#1594;&#1575;&#1604;&#1610;</h3>
+        </div>
+        <p class="sufi-text" data-i18n="sufiText">&#1610;&#1585;&#1609; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610; &#1571;&#1606; &#1575;&#1604;&#1578;&#1589;&#1608;&#1601; &#1588;&#1582;&#1617;&#1589; &#1575;&#1604;&#1591;&#1605;&#1593; &#1576;&#1588;&#1603;&#1604; &#1589;&#1581;&#1610;&#1581; &#1604;&#1603;&#1606;&#1607; &#1576;&#1575;&#1604;&#1594; &#1601;&#1610; &#1575;&#1604;&#1586;&#1607;&#1583;. &#1575;&#1604;&#1605;&#1579;&#1575;&#1604;: &#1603;&#1605;&#1606; &#1610;&#1593;&#1575;&#1604;&#1580; &#1576;&#1582;&#1610;&#1604;&#1575; &#1576;&#1571;&#1606; &#1610;&#1580;&#1593;&#1604;&#1607; &#1610;&#1576;&#1584;&#1585; &#1603;&#1604; &#1588;&#1610;&#1569;. &#1593;&#1575;&#1604;&#1580;&#1608;&#1575; &#1575;&#1604;&#1603;&#1576;&#1585; &#1601;&#1602;&#1578;&#1604;&#1608;&#1575; &#1575;&#1604;&#1591;&#1605;&#1608;&#1581; &#1608;&#1575;&#1581;&#1578;&#1585;&#1575;&#1605; &#1575;&#1604;&#1584;&#1575;&#1578;.</p>
+        <div class="sufi-analogy">
+          <span class="analogy-icon">&#9878;&#65039;</span>
+          <span data-i18n="sufiAnalogy">&#1578;&#1588;&#1582;&#1610;&#1589; &#1589;&#1581;&#1610;&#1581; + &#1580;&#1585;&#1593;&#1577; &#1586;&#1575;&#1574;&#1583;&#1577; = &#1590;&#1585;&#1585; &#1580;&#1583;&#1610;&#1583;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOT CAUSES TAB -->
+  <section class="tab-content" id="tab-causes">
+    <h2 class="section-title" data-i18n="causesTitle">&#9889; &#1575;&#1604;&#1571;&#1587;&#1576;&#1575;&#1576; &#1575;&#1604;&#1571;&#1585;&#1576;&#1593;&#1577; &#1604;&#1604;&#1578;&#1585;&#1575;&#1580;&#1593;</h2>
+    <p class="section-desc" data-i18n="causesDesc">&#1610;&#1588;&#1582;&#1589; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610; &#1571;&#1585;&#1576;&#1593;&#1577; &#1571;&#1587;&#1576;&#1575;&#1576; &#1580;&#1584;&#1585;&#1610;&#1577; &#1608;&#1585;&#1575;&#1569; &#1578;&#1585;&#1575;&#1580;&#1593; &#1575;&#1604;&#1571;&#1605;&#1577; &#1585;&#1594;&#1605; &#1575;&#1605;&#1578;&#1604;&#1575;&#1603;&#1607;&#1575; &#1604;&#1604;&#1608;&#1581;&#1610; &#1575;&#1604;&#1573;&#1604;&#1607;&#1610;</p>
+    <div class="cards-container" id="causesCards"></div>
+  </section>
+
+  <!-- ENERGIES TAB -->
+  <section class="tab-content" id="tab-energies">
+    <h2 class="section-title" data-i18n="energiesTitle">&#128267; &#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1587;&#1578; &#1575;&#1604;&#1605;&#1593;&#1591;&#1604;&#1577;</h2>
+    <p class="section-desc" data-i18n="energiesDesc">&#1587;&#1578; &#1605;&#1580;&#1575;&#1604;&#1575;&#1578; &#1603;&#1576;&#1585;&#1609; &#1578;&#1605; &#1578;&#1593;&#1591;&#1610;&#1604; &#1591;&#1575;&#1602;&#1578;&#1607;&#1575; &#1601;&#1610; &#1575;&#1604;&#1571;&#1605;&#1577;</p>
+    <!-- Search/Filter for energy domain cards -->
+    <div class="search-filter-bar" id="energySearchBar">
+      <input type="text" class="search-input" id="energySearch" data-i18n-placeholder="searchPlaceholder" placeholder="&#1575;&#1576;&#1581;&#1579; &#1601;&#1610; &#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578;...">
+    </div>
+    <div class="cards-container" id="energiesCards"></div>
+  </section>
+
+  <!-- SCENARIOS TAB -->
+  <section class="tab-content" id="tab-scenarios">
+    <h2 class="section-title" data-i18n="scenariosTitle">&#127917; &#1587;&#1610;&#1606;&#1575;&#1585;&#1610;&#1608;&#1607;&#1575;&#1578; &#1578;&#1601;&#1575;&#1593;&#1604;&#1610;&#1577;</h2>
+    <p class="section-desc" data-i18n="scenariosDesc">&#1575;&#1582;&#1578;&#1585; &#1575;&#1604;&#1575;&#1587;&#1578;&#1580;&#1575;&#1576;&#1577; &#1575;&#1604;&#1589;&#1581;&#1610;&#1581;&#1577; &#1604;&#1603;&#1604; &#1605;&#1608;&#1602;&#1601;</p>
+    <div class="scenarios-container" id="scenariosContainer"></div>
+  </section>
+
+  <!-- SOLUTIONS TAB -->
+  <section class="tab-content" id="tab-solutions">
+    <h2 class="section-title" data-i18n="solutionsTitle">&#128138; &#1575;&#1604;&#1593;&#1604;&#1575;&#1580;: &#1582;&#1605;&#1587;&#1577; &#1571;&#1576;&#1593;&#1575;&#1583;</h2>
+    <p class="section-desc" data-i18n="solutionsDesc">&#1575;&#1604;&#1581;&#1604;&#1608;&#1604; &#1575;&#1604;&#1593;&#1605;&#1604;&#1610;&#1577; &#1575;&#1604;&#1578;&#1610; &#1610;&#1602;&#1578;&#1585;&#1581;&#1607;&#1575; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610; &#1604;&#1573;&#1610;&#1602;&#1575;&#1592; &#1575;&#1604;&#1571;&#1605;&#1577;</p>
+    <div class="cards-container" id="solutionsCards"></div>
+  </section>
+
+  <!-- ASSESSMENT TAB -->
+  <section class="tab-content" id="tab-assess">
+    <h2 class="section-title" data-i18n="assessTitle">&#129300; &#1605;&#1575; &#1605;&#1583;&#1609; &#1578;&#1601;&#1593;&#1610;&#1604; &#1591;&#1575;&#1602;&#1575;&#1578;&#1603;&#1567;</h2>
+    <p class="section-desc" data-i18n="assessDesc">&#1571;&#1580;&#1576; &#1576;&#1589;&#1583;&#1602; &#1604;&#1578;&#1602;&#1610;&#1610;&#1605; &#1605;&#1587;&#1578;&#1608;&#1609; &#1578;&#1601;&#1593;&#1610;&#1604; &#1591;&#1575;&#1602;&#1575;&#1578;&#1603;</p>
+    <div class="quiz-container" id="quizContainer"></div>
+    <div class="quiz-actions">
+      <button class="btn-primary" id="submitQuiz" data-i18n="submitQuiz">&#1571;&#1585;&#1587;&#1604; &#1575;&#1604;&#1578;&#1602;&#1610;&#1610;&#1605;</button>
+      <button class="btn-secondary" id="resetQuiz" data-i18n="resetQuiz">&#1573;&#1593;&#1575;&#1583;&#1577; &#1575;&#1604;&#1578;&#1602;&#1610;&#1610;&#1605;</button>
+    </div>
+    <div class="quiz-result" id="quizResult" style="display:none;"></div>
+  </section>
+
+  <!-- ABOUT TAB -->
+  <section class="tab-content active" id="tab-about">
+    <h2 class="section-title" data-i18n="aboutTitle">&#128214; &#1593;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;</h2>
+    <div class="about-card reveal-on-scroll">
+      <h3 data-i18n="bookInfoTitle">&#1605;&#1593;&#1604;&#1608;&#1605;&#1575;&#1578; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;</h3>
+      <ul class="about-list">
+        <li><strong data-i18n="bookName">&#1575;&#1604;&#1603;&#1578;&#1575;&#1576;:</strong> <span data-i18n="bookNameVal">&#1575;&#1604;&#1573;&#1587;&#1604;&#1575;&#1605; &#1608;&#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1605;&#1593;&#1591;&#1604;&#1577;</span></li>
+        <li><strong data-i18n="authorLabel">&#1575;&#1604;&#1605;&#1572;&#1604;&#1601;:</strong> <span data-i18n="authorVal">&#1575;&#1604;&#1588;&#1610;&#1582; &#1605;&#1581;&#1605;&#1583; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610; (1917-1996)</span></li>
+        <li><strong data-i18n="chaptersLabel">&#1575;&#1604;&#1601;&#1589;&#1608;&#1604;:</strong> <span>16</span></li>
+        <li><strong data-i18n="structureLabel">&#1575;&#1604;&#1607;&#1610;&#1603;&#1604;:</strong> <span data-i18n="structureVal">&#1578;&#1588;&#1582;&#1610;&#1589; &#8594; &#1578;&#1581;&#1604;&#1610;&#1604; &#8594; &#1585;&#1572;&#1610;&#1577;</span></li>
+      </ul>
+    </div>
+    <div class="about-card reveal-on-scroll">
+      <h3 data-i18n="authorBioTitle">&#1593;&#1606; &#1575;&#1604;&#1605;&#1572;&#1604;&#1601;</h3>
+      <p data-i18n="authorBio">&#1575;&#1604;&#1588;&#1610;&#1582; &#1605;&#1581;&#1605;&#1583; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610; (1917-1996) &#1605;&#1601;&#1603;&#1585; &#1573;&#1587;&#1604;&#1575;&#1605;&#1610; &#1605;&#1589;&#1585;&#1610; &#1576;&#1575;&#1585;&#1586;. &#1571;&#1604;&#1601; &#1571;&#1603;&#1579;&#1585; &#1605;&#1606; 60 &#1603;&#1578;&#1575;&#1576;&#1575; &#1601;&#1610; &#1575;&#1604;&#1601;&#1603;&#1585; &#1575;&#1604;&#1573;&#1587;&#1604;&#1575;&#1605;&#1610;. &#1593;&#1615;&#1585;&#1601; &#1576;&#1605;&#1606;&#1607;&#1580;&#1607; &#1575;&#1604;&#1608;&#1587;&#1591;&#1610; &#1575;&#1604;&#1580;&#1575;&#1605;&#1593; &#1576;&#1610;&#1606; &#1575;&#1604;&#1571;&#1589;&#1575;&#1604;&#1577; &#1608;&#1575;&#1604;&#1578;&#1580;&#1583;&#1610;&#1583;. &#1583;&#1575;&#1601;&#1593; &#1593;&#1606; &#1581;&#1602;&#1608;&#1602; &#1575;&#1604;&#1605;&#1585;&#1571;&#1577; &#1608;&#1575;&#1604;&#1593;&#1602;&#1604; &#1608;&#1575;&#1604;&#1575;&#1580;&#1578;&#1607;&#1575;&#1583;.</p>
+    </div>
+    <div class="about-card disclaimer-card reveal-on-scroll">
+      <h3 data-i18n="disclaimerTitle">&#1573;&#1582;&#1604;&#1575;&#1569; &#1605;&#1587;&#1572;&#1608;&#1604;&#1610;&#1577;</h3>
+      <p data-i18n="disclaimerText">&#1604;&#1587;&#1578; &#1593;&#1575;&#1604;&#1605;&#1575;. &#1607;&#1584;&#1575; &#1580;&#1607;&#1583; &#1605;&#1578;&#1608;&#1575;&#1590;&#1593; &#1605;&#1606; &#1571;&#1605; &#1605;&#1587;&#1604;&#1605;&#1577;. &#1575;&#1604;&#1605;&#1581;&#1578;&#1608;&#1609; &#1605;&#1587;&#1578;&#1605;&#1583; &#1605;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576; &#1608;&#1605;&#1589;&#1575;&#1583;&#1585; &#1573;&#1587;&#1604;&#1575;&#1605;&#1610;&#1577; &#1605;&#1608;&#1579;&#1608;&#1602;&#1577;. &#1604;&#1610;&#1587; &#1601;&#1578;&#1608;&#1609;.</p>
+    </div>
+    <div class="about-card reveal-on-scroll">
+      <h3 data-i18n="sourcesTitle">&#1575;&#1604;&#1605;&#1589;&#1575;&#1583;&#1585;</h3>
+      <ul class="about-list">
+        <li data-i18n="source1">&#1575;&#1604;&#1573;&#1587;&#1604;&#1575;&#1605; &#1608;&#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1605;&#1593;&#1591;&#1604;&#1577; - &#1605;&#1581;&#1605;&#1583; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610;</li>
+        <li data-i18n="source2">&#1575;&#1604;&#1602;&#1585;&#1570;&#1606; &#1575;&#1604;&#1603;&#1585;&#1610;&#1605;</li>
+        <li data-i18n="source3">&#1575;&#1604;&#1587;&#1606;&#1577; &#1575;&#1604;&#1606;&#1576;&#1608;&#1610;&#1577; &#1575;&#1604;&#1588;&#1585;&#1610;&#1601;&#1577;</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- BOTTOM TABS -->
+<nav class="bottom-tabs" id="bottomTabs">
+    <div class="tabs-meta"><div class="ticker-wrap"><div class="ticker-text" id="tickerText"></div></div></div>
+    <div class="tabs-row">
+      <button class="tab-btn" data-tab="home">
+    <span class="tab-icon">&#127968;</span>
+    <span class="tab-label" data-i18n="tabHome">&#1575;&#1604;&#1585;&#1574;&#1610;&#1587;&#1610;&#1577;</span>
+  </button>
+  <button class="tab-btn" data-tab="causes">
+    <span class="tab-icon">&#9889;</span>
+    <span class="tab-label" data-i18n="tabCauses">&#1575;&#1604;&#1571;&#1587;&#1576;&#1575;&#1576;</span>
+  </button>
+  <button class="tab-btn" data-tab="energies">
+    <span class="tab-icon">&#128267;</span>
+    <span class="tab-label" data-i18n="tabEnergies">&#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578;</span>
+  </button>
+  <button class="tab-btn" data-tab="scenarios">
+    <span class="tab-icon">&#127917;</span>
+    <span class="tab-label" data-i18n="tabScenarios">&#1587;&#1610;&#1606;&#1575;&#1585;&#1610;&#1608;</span>
+  </button>
+  <button class="tab-btn" data-tab="solutions">
+    <span class="tab-icon">&#128138;</span>
+    <span class="tab-label" data-i18n="tabSolutions">&#1575;&#1604;&#1593;&#1604;&#1575;&#1580;</span>
+  </button>
+  <button class="tab-btn" data-tab="assess">
+    <span class="tab-icon">&#129300;</span>
+    <span class="tab-label" data-i18n="tabAssess">&#1578;&#1602;&#1610;&#1610;&#1605;</span>
+  </button>
+  <button class="tab-btn active" data-tab="about">
+    <span class="tab-icon">&#128214;</span>
+    <span class="tab-label" data-i18n="tabAbout">&#1575;&#1604;&#1603;&#1578;&#1575;&#1576;</span>
+  </button>
+</nav>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top-btn" id="scrollTopBtn" title="Top">&#8679;</button>
+
+<!-- DUA FLOAT BUTTON -->
+<button class="dua-float-btn" id="duaBtn" title="Dua">&#128588;</button>
+
+<!-- HELP MODAL -->
+<div class="modal-overlay" id="helpModal">
+  <div class="modal-content">
+    <button class="modal-close" id="helpClose">&times;</button>
+    <h2 data-i18n="helpTitle">&#1605;&#1587;&#1575;&#1593;&#1583;&#1577;</h2>
+    <div class="modal-body">
+      <div class="help-section">
+        <h3 data-i18n="helpDisclaimer">&#1573;&#1582;&#1604;&#1575;&#1569; &#1605;&#1587;&#1572;&#1608;&#1604;&#1610;&#1577;</h3>
+        <p data-i18n="helpDisclaimerText">&#1604;&#1587;&#1578; &#1593;&#1575;&#1604;&#1605;&#1575;. &#1607;&#1584;&#1575; &#1580;&#1607;&#1583; &#1605;&#1578;&#1608;&#1575;&#1590;&#1593; &#1605;&#1606; &#1571;&#1605; &#1605;&#1587;&#1604;&#1605;&#1577;. &#1575;&#1604;&#1605;&#1581;&#1578;&#1608;&#1609; &#1605;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576; &#1608;&#1605;&#1589;&#1575;&#1583;&#1585; &#1573;&#1587;&#1604;&#1575;&#1605;&#1610;&#1577; &#1605;&#1608;&#1579;&#1608;&#1602;&#1577;. &#1604;&#1610;&#1587; &#1601;&#1578;&#1608;&#1609;.</p>
+      </div>
+      <div class="help-section">
+        <h3 data-i18n="helpSources">&#1575;&#1604;&#1605;&#1589;&#1575;&#1583;&#1585;</h3>
+        <p data-i18n="helpSourcesText">&#1575;&#1604;&#1573;&#1587;&#1604;&#1575;&#1605; &#1608;&#1575;&#1604;&#1591;&#1575;&#1602;&#1575;&#1578; &#1575;&#1604;&#1605;&#1593;&#1591;&#1604;&#1577; - &#1575;&#1604;&#1588;&#1610;&#1582; &#1605;&#1581;&#1605;&#1583; &#1575;&#1604;&#1594;&#1586;&#1575;&#1604;&#1610; | &#1575;&#1604;&#1602;&#1585;&#1570;&#1606; &#1575;&#1604;&#1603;&#1585;&#1610;&#1605; | &#1575;&#1604;&#1587;&#1606;&#1577; &#1575;&#1604;&#1606;&#1576;&#1608;&#1610;&#1577;</p>
+      </div>
+      <div class="help-section">
+        <h3 data-i18n="helpContrib">&#1575;&#1604;&#1605;&#1587;&#1575;&#1607;&#1605;&#1577;</h3>
+        <p data-i18n="helpContribText">&#1607;&#1584;&#1575; &#1605;&#1588;&#1585;&#1608;&#1593; &#1605;&#1601;&#1578;&#1608;&#1581;. &#1610;&#1605;&#1603;&#1606;&#1603; &#1575;&#1604;&#1605;&#1587;&#1575;&#1607;&#1605;&#1577; &#1593;&#1576;&#1585; workshop-diy.org</p>
+      </div>
+      <div class="help-section">
+        <h3 data-i18n="helpAI">&#1576;&#1606;&#1575;&#1569; &#1576;&#1575;&#1604;&#1584;&#1603;&#1575;&#1569; &#1575;&#1604;&#1575;&#1589;&#1591;&#1606;&#1575;&#1593;&#1610;</h3>
+        <p data-i18n="helpAIText">&#1578;&#1605; &#1576;&#1606;&#1575;&#1569; &#1607;&#1584;&#1575; &#1575;&#1604;&#1578;&#1591;&#1576;&#1610;&#1602; &#1576;&#1605;&#1587;&#1575;&#1593;&#1583;&#1577; &#1575;&#1604;&#1584;&#1603;&#1575;&#1569; &#1575;&#1604;&#1575;&#1589;&#1591;&#1606;&#1575;&#1593;&#1610; &#1603;&#1571;&#1583;&#1575;&#1577; &#1604;&#1578;&#1587;&#1607;&#1610;&#1604; &#1575;&#1604;&#1578;&#1591;&#1608;&#1610;&#1585;. &#1575;&#1604;&#1605;&#1581;&#1578;&#1608;&#1609; &#1575;&#1604;&#1593;&#1604;&#1605;&#1610; &#1605;&#1606; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576; &#1575;&#1604;&#1571;&#1589;&#1604;&#1610;.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+
+<script src="app.js"></script>
+<script src="genius.js"></script><script>document.addEventListener('DOMContentLoaded',function(){if(window.geniusInit)geniusInit({particles:{color1:'rgba(0,102,204,0.2)',color2:'rgba(255,160,0,0.15)',count:18},appKey:'ayqidh',darkTheme:'fajr'})});</script>
+</body>
+</html>
