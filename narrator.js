@@ -847,15 +847,15 @@
     updateLabels();
     setTimeout(injectSpeakButtons, 500);
     // Repopulate voices and labels when language changes
-    const origLangFn = window.applyLang || window.setLang;
-    const hookName = window.applyLang ? 'applyLang' : 'setLang';
-    if (origLangFn) {
-      window[hookName] = function(l) {
-        origLangFn(l);
-        setTimeout(() => { populateVoiceSelect(); updateLabels(); injectSpeakButtons(); }, 100);
+    var lastLang = document.documentElement.lang || 'ar';
+    new MutationObserver(function() {
+      var newLang = document.documentElement.lang || 'ar';
+      if (newLang !== lastLang) {
+        lastLang = newLang;
+        setTimeout(function() { populateVoiceSelect(); updateLabels(); injectSpeakButtons(); }, 100);
         if (STATE.playing) stopNarrator();
-      };
-    }
+      }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   }
 
   // ═══ READ SINGLE SECTION ═══
