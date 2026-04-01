@@ -1615,3 +1615,58 @@ body.reading-mode .tab-content:not(.active) {
 .ticker-text{display:inline-flex;white-space:nowrap;color:var(--t2,#6b5d4d);font-size:.62rem;opacity:.75}
 .ticker-text .tc{white-space:nowrap;flex-shrink:0}
 @keyframes tickerMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══════════ NARRATOR ═══════════ */
+.narrator-btn{border:none;background:rgba(0,102,204,.12);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:.3s}
+.narrator-btn:hover,.narrator-btn.active{background:var(--accent);transform:scale(1.1)}
+.narrator-btn.active{animation:narratorPulse 2s ease-in-out infinite}
+@keyframes narratorPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,102,204,.4)}50%{box-shadow:0 0 0 8px rgba(0,102,204,0)}}
+
+.narrator-panel{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:200;background:var(--bg-card);border-radius:16px;width:92%;max-width:420px;max-height:calc(100vh - 140px);overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,.25);border:1px solid rgba(0,102,204,.15);direction:ltr}
+[dir="rtl"] .narrator-panel{direction:rtl}
+.narrator-panel.hidden{display:none}
+.narrator-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(0,102,204,.1);background:rgba(0,102,204,.04);position:sticky;top:0;z-index:1}
+.narrator-title{font-family:var(--font-body);font-weight:700;color:var(--accent);font-size:.95rem}
+.narrator-body{padding:12px 16px 16px}
+
+/* Mode buttons */
+.narrator-modes{display:flex;gap:8px;margin-bottom:12px}
+.narrator-mode-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border:1px solid rgba(0,102,204,.2);border-radius:10px;background:rgba(0,102,204,.06);cursor:pointer;font-size:.85rem;font-family:var(--font-body);color:var(--text-primary);transition:.2s}
+.narrator-mode-btn:hover{background:rgba(0,102,204,.15);border-color:var(--accent)}
+.narrator-mode-btn:active{transform:scale(.97)}
+
+/* Transport controls */
+.narrator-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
+.narrator-ctrl{border:none;background:none;font-size:1.4rem;cursor:pointer;padding:6px;border-radius:50%;transition:.2s}
+.narrator-ctrl:hover{background:rgba(0,102,204,.1);transform:scale(1.1)}
+.narrator-ctrl-main{font-size:1.8rem}
+
+/* Progress bar */
+.narrator-progress-wrap{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.narrator-bar-bg{flex:1;height:4px;background:rgba(0,102,204,.12);border-radius:2px;overflow:hidden}
+.narrator-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;width:0}
+.narrator-progress-text{font-size:.72rem;color:var(--text-muted);min-width:36px;text-align:center}
+
+/* Settings */
+.narrator-settings{border-top:1px solid rgba(0,102,204,.08);padding-top:12px}
+.narrator-setting{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.narrator-setting label{font-size:.78rem;color:var(--text-secondary);min-width:55px;font-family:var(--font-body)}
+.narrator-setting input[type=range]{flex:1;accent-color:var(--accent);height:4px}
+.narrator-setting span{font-size:.72rem;color:var(--text-muted);min-width:28px;text-align:center}
+.narrator-setting select{flex:1;background:var(--bg-primary);color:var(--text-primary);border:1px solid rgba(0,102,204,.15);border-radius:6px;padding:4px 8px;font-size:.78rem;font-family:var(--font-body)}
+
+/* Toggles */
+.narrator-toggles{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.narrator-toggle{display:flex;align-items:center;gap:4px;font-size:.75rem;color:var(--text-secondary);cursor:pointer;font-family:var(--font-body)}
+.narrator-toggle input{accent-color:var(--accent)}
+
+/* Karaoke word highlight */
+.narrator-word-highlight{background:rgba(0,102,204,.3);border-radius:2px;padding:0 2px;transition:background .15s}
+
+/* Active card glow */
+.narrator-active-card{outline:2px solid var(--accent);outline-offset:2px;border-radius:var(--radius);transition:outline .3s;box-shadow:0 0 20px rgba(0,102,204,.15)}
+
+/* Per-card speak button */
+.narrator-speak-btn{position:absolute;top:8px;left:8px;width:28px;height:28px;border:none;background:rgba(0,102,204,.1);border-radius:50%;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;opacity:.4;transition:.2s;z-index:2}
+[dir="rtl"] .narrator-speak-btn{left:auto;right:8px}
+.narrator-speak-btn:hover{opacity:1;background:rgba(0,102,204,.25);transform:scale(1.15)}
