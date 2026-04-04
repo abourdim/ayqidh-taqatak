@@ -1671,3 +1671,7 @@ body.reading-mode .tab-content:not(.active) {
 [dir="rtl"] .narrator-speak-btn{left:auto;right:8px}
 .narrator-speak-btn:hover{opacity:1;background:rgba(0,102,204,.25);transform:scale(1.15)}
 .narrator-panel *{color:#eee!important}.narrator-panel select{background:#1a1a2e!important;color:#eee!important;border-color:rgba(255,255,255,.2)!important}.narrator-panel .narrator-title{color:#ffcc80!important}.narrator-panel .narrator-mode-btn{color:#eee!important;background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.15)!important}.narrator-panel .narrator-mode-btn:hover{background:rgba(255,255,255,.15)!important}.narrator-panel input[type=range]{accent-color:#ffcc80}
+.expand-card,.about-card,.daily-tip-card,.challenge-card{color:var(--text-primary,#E0E0E0)!important}
+[data-theme="energy"] .expand-card,[data-theme="energy"] .about-card{color:var(--text-primary,#FFFFFF)!important}
+[data-theme="fajr"] .expand-card,[data-theme="fajr"] .about-card{color:var(--text-primary,#FFF8E1)!important}
+[data-theme="yaqza"] .expand-card,[data-theme="yaqza"] .about-card{color:var(--text-primary,#E8F5E9)!important}
