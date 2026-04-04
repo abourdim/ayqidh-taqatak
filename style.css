@@ -1675,3 +1675,18 @@ body.reading-mode .tab-content:not(.active) {
 [data-theme="energy"] .expand-card,[data-theme="energy"] .about-card{color:var(--text-primary,#FFFFFF)!important}
 [data-theme="fajr"] .expand-card,[data-theme="fajr"] .about-card{color:var(--text-primary,#FFF8E1)!important}
 [data-theme="yaqza"] .expand-card,[data-theme="yaqza"] .about-card{color:var(--text-primary,#E8F5E9)!important}
+/* Fix header overflow on mobile */
+@media(max-width:420px){
+  header,.app-header,.hdr{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  header .header-inner,.app-header .header-inner,.hdr .hdr-r,.header-controls,.header-right,.top-bar-right{flex-wrap:nowrap;gap:4px!important}
+  header button,.app-header button,.hdr button{min-width:28px!important;width:28px!important;height:28px!important;font-size:.8rem!important;padding:2px!important}
+  header .lang-opt,.app-header .lang-opt,.hdr .lang-opt,.lang-opt{min-width:24px!important;width:24px!important}
+  header .lang-opt svg,.app-header .lang-opt svg,.hdr .lang-opt svg,.lang-opt svg{width:16px!important;height:11px!important}
+}
+/* Fix tabs overflow on mobile */
+@media(max-width:420px){
+  .tabs-row,.btabs{overflow-x:auto!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap!important}
+  .tabs-row::-webkit-scrollbar,.btabs::-webkit-scrollbar{display:none}
+  .tab,.tab-btn,.btab{font-size:.65rem!important;padding:6px 8px!important;min-width:auto!important;white-space:nowrap}
+  .tab .tl,.tab-btn .tab-label,.btab{font-size:.6rem!important}
+}
