@@ -1221,7 +1221,11 @@
     playTab();
     // Trigger reveal for newly visible content
     setTimeout(observeReveals, 100);
+    // Auto-render quiz when switching to quiz tab
+  if (name === 'quiz' && document.getElementById('quizContainer') && !document.getElementById('quizContainer').innerHTML.trim()) {
+    renderQuiz();
   }
+}
 
   // ============ TOAST ============
   function showToast(msg) {
