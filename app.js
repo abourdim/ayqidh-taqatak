@@ -1370,6 +1370,10 @@
     const challengeBtn = $('#challengeDoneBtn');
     if (challengeBtn) challengeBtn.addEventListener('click', completeChallenge);
 
+    // Event: Reading mode
+    const readingBtn = $('#readingModeBtn');
+    if (readingBtn) readingBtn.addEventListener('click', toggleReadingMode);
+
     // Energy search
     setupEnergySearch();
 
@@ -1407,3 +1411,24 @@ function startTicker(){
   el.style.animation='tickerMarquee '+Math.max(25,txt.length*0.12)+'s linear infinite';
 }
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',startTicker)}else{startTicker()}
+
+/* READING MODE */
+function toggleReadingMode() {
+  const isActive = document.body.classList.toggle('reading-mode');
+  if (isActive) {
+    const exitBtn = document.createElement('button');
+    exitBtn.className = 'reading-exit';
+    exitBtn.id = 'readingExitBtn';
+    exitBtn.innerHTML = '&#10005;';
+    exitBtn.onclick = toggleReadingMode;
+    document.body.appendChild(exitBtn);
+  } else {
+    const exitBtn = document.getElementById('readingExitBtn');
+    if (exitBtn) exitBtn.remove();
+  }
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.body.classList.contains('reading-mode')) {
+    toggleReadingMode();
+  }
+});
